@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f5f8">
+  <title>Demo sign in | Northstar Admin</title>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/auth.js" defer></script>
+</head>
+<body data-page="login">
+  <main class="login-page">
+    <section class="login-panel" aria-labelledby="login-heading">
+      <a class="brand login-brand" href="index.html" aria-label="Northstar Admin home"><span class="brand-mark" aria-hidden="true">N</span><span>northstar<span class="brand-light"> / admin</span></span></a>
+      <p class="eyebrow login-kicker">RabTech Academy capstone</p>
+      <h1 id="login-heading">Demo sign in</h1>
+      <p class="muted">This client-side sign-in is for demonstration only. It is not production authentication.</p>
+      <form class="login-form" data-login-form>
+        <div class="field-group"><label for="login-email">Email</label><input id="login-email" name="email" type="email" autocomplete="username" required maxlength="120" aria-describedby="login-credentials login-email-error"><small class="field-error" id="login-email-error"></small></div>
+        <div class="field-group"><label for="login-password">Password</label><input id="login-password" name="password" type="password" autocomplete="current-password" required minlength="8" maxlength="100" aria-describedby="login-credentials login-password-error"><small class="field-error" id="login-password-error"></small></div>
+        <p class="login-feedback" data-login-feedback role="status" aria-live="polite"></p>
+        <button class="button button-primary login-submit" type="submit">Sign in to demo</button>
+      </form>
+      <aside class="demo-notice" aria-label="Demo credentials"><strong>Public demo credentials</strong><p data-demo-credentials></p><small>No password is saved. The simulated session is stored only for this browser tab.</small></aside>
+    </section>
+    <footer class="login-footer">© 2026 Northstar Admin · Authentication simulation</footer>
+  </main>
+</body>
+</html>

@@ -1,8 +1,10 @@
 import { ApiError, fetchCategories, fetchProducts } from './api.js';
 import { addToCart, getCartSummary, removeFromCart, setCartQuantity } from './cart.js';
 import { filterAndSortProducts } from './catalog-utils.js';
+import { listManagedProducts } from './managed-products.js';
 import { readProductPreferences, writeProductPreferences } from './storage.js';
 
+if (document.documentElement.dataset.authenticated === 'true') {
 const productGrid = document.querySelector('[data-product-grid]');
 const categoryList = document.querySelector('[data-category-list]');
 const searchInput = document.querySelector('#catalog-search');
@@ -21,7 +23,9 @@ const cartFeedback = document.querySelector('[data-cart-feedback]');
 
 const preferences = readProductPreferences();
 let products = [];
+let apiProducts = [];
 let categories = [];
+let managedProducts = listManagedProducts();
 let selectedCategory = preferences.category;
 let categoryWarning = '';
 let announcementTimer;
@@ -64,6 +68,7 @@ const createProductCard = (product) => {
 
   const details = makeElement('div', 'product-details');
   details.append(makeElement('p', 'product-category', product.category));
+  details.append(makeElement('span', product.source === 'local' ? 'product-source source-local' : 'product-source source-api', product.source === 'local' ? 'Local demo record' : 'FakeStoreAPI'));
   details.append(makeElement('h2', 'product-title', product.title));
   const rating = makeElement('p', 'product-rating');
   rating.append(makeElement('span', 'rating-value', `${product.rating.rate.toFixed(1)} / 5`));
@@ -201,10 +206,23 @@ const loadCatalog = async ({ retry = false } = {}) => {
       fetchProducts({ force: retry }),
       fetchCategories({ force: retry })
     ]);
-    if (loadedProducts.status === 'rejected') throw loadedProducts.reason;
-    products = loadedProducts.value;
+    managedProducts = listManagedProducts();
+    if (loadedProducts.status === 'rejected') {
+      if (!managedProducts.length) throw loadedProducts.reason;
+      products = managedProducts;
+      categories = [...new Set(managedProducts.map((product) => product.category))];
+      categoryWarning = 'FakeStoreAPI is unavailable. Showing locally managed demo products only.';
+      renderCategories();
+      errorMessage.textContent = loadedProducts.reason instanceof ApiError ? loadedProducts.reason.message : 'The product service could not be reached.';
+      errorBanner.hidden = false;
+      savePreferences();
+      renderProducts();
+      return;
+    }
+    apiProducts = loadedProducts.value.map((product) => ({ ...product, source: 'api' }));
+    products = [...apiProducts, ...managedProducts];
     if (categoryResult.status === 'fulfilled') {
-      categories = categoryResult.value;
+      categories = [...new Set([...categoryResult.value, ...managedProducts.map((product) => product.category)])];
       categoryWarning = '';
     } else {
       categories = [...new Set(products.map((product) => product.category))];
@@ -279,6 +297,14 @@ cartItems.addEventListener('click', (event) => {
 });
 
 document.addEventListener('northstar:cart-change', (event) => renderCart(event.detail));
+document.addEventListener('northstar:managed-products-change', () => {
+  managedProducts = listManagedProducts();
+  products = [...apiProducts, ...managedProducts];
+  categories = [...new Set([...categories, ...managedProducts.map((product) => product.category)])];
+  renderCategories();
+  renderProducts();
+});
 
 renderCart();
 loadCatalog();
+}

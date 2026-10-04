@@ -1,4 +1,4 @@
-import { readCartStorage, writeCartStorage } from './storage.js';
+import { addRecentActivity, readCartStorage, writeCartStorage } from './storage.js';
 
 let cart = readCartStorage();
 
@@ -18,7 +18,10 @@ export const getCartSummary = () => ({
 });
 
 export const addToCart = (product) => {
-  if (!product || !Number.isInteger(product.id) || !Number.isFinite(product.price)) {
+  const validId = Number.isInteger(product?.id) && product.id > 0
+    || typeof product?.id === 'string' && product.id.startsWith('local-');
+  if (!product || !validId || !Number.isFinite(product.price) || typeof product.title !== 'string'
+    || typeof product.image !== 'string' || typeof product.category !== 'string') {
     throw new TypeError('A valid product is required to add it to the cart.');
   }
   const existing = cart.find((item) => item.id === product.id);
@@ -34,12 +37,13 @@ export const addToCart = (product) => {
       quantity: 1
     });
   }
+  addRecentActivity(`Added ${product.title} to the demo cart`);
   announceChange();
   return getCartSummary();
 };
 
 export const setCartQuantity = (productId, quantity) => {
-  const existing = cart.find((item) => item.id === Number(productId));
+  const existing = cart.find((item) => String(item.id) === String(productId));
   if (!existing || !Number.isInteger(quantity)) return getCartSummary();
   if (quantity < 1) {
     cart = cart.filter((item) => item.id !== existing.id);
@@ -51,7 +55,7 @@ export const setCartQuantity = (productId, quantity) => {
 };
 
 export const removeFromCart = (productId) => {
-  const nextCart = cart.filter((item) => item.id !== Number(productId));
+  const nextCart = cart.filter((item) => String(item.id) !== String(productId));
   if (nextCart.length !== cart.length) {
     cart = nextCart;
     announceChange();

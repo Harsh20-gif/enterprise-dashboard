@@ -3,6 +3,10 @@ html {
   overflow-x: clip;
 }
 
+html:not([data-authenticated="true"]) body:not([data-page="login"]) {
+  visibility: hidden;
+}
+
 .topbar {
   height: var(--header-height-mobile);
   gap: var(--space-2);
@@ -209,6 +213,24 @@ html {
 
 .dialog-form {
   padding: 19px;
+}
+
+.managed-toolbar {
+  align-items: stretch;
+  flex-direction: column;
+}
+
+.managed-toolbar .search-field {
+  width: 100%;
+}
+
+.login-page {
+  padding: var(--space-4);
+}
+
+.login-footer {
+  position: static;
+  margin-top: var(--space-4);
 }
 
 .catalog-toolbar {
@@ -431,6 +453,15 @@ html {
 
   .dialog-form {
     padding: var(--space-6);
+  }
+
+  .managed-toolbar {
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .managed-toolbar .search-field {
+    width: min(270px, 34vw);
   }
 
   .catalog-toolbar {

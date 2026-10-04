@@ -1,21 +1,21 @@
 # Enterprise Dashboard
 
-An accessible and maintainable full-stack dashboard project.
+An accessible responsive dashboard frontend and browser-local capstone demo. The `server/src/` folder is currently an empty placeholder; the application does not provide a backend database, real authentication, orders, or payment processing.
 
 ## Project Overview
 
-This project establishes a foundation for building an accessible, responsive enterprise dashboard using modern web technologies.
+This project combines the internship tasks into a static multi-page Enterprise Dashboard using semantic HTML, tokenized CSS, vanilla JavaScript, ES modules, and FakeStoreAPI integration.
 
 ## Architecture
 
 * **Client:** User interface, semantic HTML, CSS and JavaScript.
-* **Server:** Backend APIs and business logic.
+* **Server:** Reserved placeholder; no server-side application is implemented.
 * **Docs:** Accessibility audit and architecture documentation.
 * **Tests:** Accessibility and integration test organization.
 
-## First Vertical Feature Slice
+## Task 02 Foundation
 
-The first feature is a dashboard overview that displays summary cards and a basic data table.
+The initial repository slice established the dashboard overview structure and project organization.
 
 ### Initial workflow
 
@@ -46,7 +46,7 @@ The project follows semantic HTML and aims to meet WCAG 2.1 accessibility requir
 
 ## Testing
 
-Accessibility and integration testing will be documented and expanded as features are implemented.
+Accessibility and integration testing are recorded in the task-specific documentation below.
 # enterprise-dashboard
 
 ## Task 03: Enterprise Admin Dashboard
@@ -58,7 +58,7 @@ Task 03 adds a responsive, multi-page static admin dashboard built with semantic
 - Overview dashboard with business metrics, revenue chart, activity feed, and recent users.
 - User directory with live search, pagination, accessible add/edit dialog, validation, and confirmed deletion.
 - Reports with date filtering and CSV export.
-- Account profile, notification, and theme preferences. Theme and settings persist in the current browser; user-directory changes are demonstration data held in memory.
+- Account profile, notification, and theme preferences. Theme, settings, demo users, and managed products persist in this browser only.
 - Responsive navy navigation, mobile menu toggle, skip link, visible focus indicators, reduced-motion support, and light/dark themes.
 
 ### Folder Structure
@@ -66,21 +66,27 @@ Task 03 adds a responsive, multi-page static admin dashboard built with semantic
 ```text
 client/
 	index.html
+	login.html
 	users.html
 	reports.html
 	settings.html
 	products.html
+	manage-products.html
 	components/          Reusable standalone HTML fragments
 	assets/icons/        Local icon asset directory
 	css/tokens.css       Shared semantic design tokens
 	css/style.css        Shared component styling
 	css/responsive.css   Mobile-first layout and breakpoints
 	js/app.js
+	js/auth.js
+	js/dashboard.js
 	js/api.js
 	js/products.js
 	js/catalog-utils.js
 	js/cart.js
 	js/storage.js
+	js/managed-products.js
+	js/manage-products.js
 	src/index.html       Preserved Task 02 file
 server/src/            Preserved backend workspace
 docs/
@@ -90,12 +96,17 @@ docs/
 	design-system.md
 	responsive-testing.md
 	task-05-api-integration.md
+	capstone-architecture.md
+	deployment-guide.md
+netlify.toml              Static publish directory configuration
 tests/accessibility/manual-checklist.md
+tests/task-05/            API, catalog, storage, and cart tests
+tests/task-06/            Capstone demo user/product state tests
 ```
 
 ### Local Setup and Navigation
 
-No package installation or build step is required. Open `client/index.html` in a modern browser, or serve the `client/` directory with a local static server such as the VS Code Live Server extension. Use the sidebar links to navigate among Overview, Users, Reports, and Settings. The static pages remain usable without server-side APIs; changes to the sample user list reset on reload.
+No package installation or build step is required. Serve the `client/` directory over HTTP (for example, with Python's `python -m http.server 4173 --directory client`) and open `http://localhost:4173/login.html`. Native ES modules are not reliably usable from `file://`. The sidebar links navigate among Overview, Product catalog, Product management, Users, Reports, and Settings. Demo user/product records and cart data persist in this browser only.
 
 ### Accessibility
 
@@ -133,3 +144,61 @@ node --test tests/task-05/*.test.mjs
 ```
 
 The recorded local result is 8 passed, 0 failed. Controlled API responses were used only for deterministic UI tests. The actual FakeStoreAPI call returned HTTP 522 from PowerShell and was blocked by CORS in the integrated browser, so successful live API operation is not yet verified. The page shows its real network error and retry action and does not insert mock products. See [docs/task-05-api-integration.md](docs/task-05-api-integration.md) for endpoint, module, test, and limitation details.
+
+## Task 06 Capstone
+
+### Features
+
+- Overview analytics sourced from catalog responses and browser-local demo records; unavailable API metrics are shown as unavailable, not fabricated.
+- FakeStoreAPI catalog with loading/error/retry, search, categories, sorting, and a persistent cart simulation.
+- Separate local product CRUD page with add, details, edit, delete confirmation, category filtering, sorting, and browser-local persistence.
+- Persistent browser-local demo user CRUD with search, pagination, and editable status.
+- Visible authentication simulation with protected application routes, login/logout, and tab-scoped session persistence.
+- Responsive light/dark design system, keyboard focus styles, and reduced-motion handling from Task 04.
+- Reports remain illustrative sample rows, clearly labeled because there is no transaction service.
+
+### Technology and Architecture
+
+The app uses plain HTML5, CSS3, and vanilla JavaScript ES modules. `client/css/tokens.css`, `style.css`, and `responsive.css` provide design tokens, component styles, and breakpoints. Key modules include `auth.js`, `api.js`, `dashboard.js`, `products.js`, `managed-products.js`, `manage-products.js`, `catalog-utils.js`, `cart.js`, and `storage.js`. See [docs/capstone-architecture.md](docs/capstone-architecture.md).
+
+### Screenshots
+
+No Task 06 screenshots are included yet. Capture genuine browser views and save them under [docs/screenshots](docs/screenshots/README.md): `dashboard-overview.png`, `product-catalog.png`, `product-management.png`, `user-management.png`, `shopping-cart.png`, `mobile-dashboard.png`, and `login-screen.png`. The directory guide contains manual capture steps; no chat/browser preview is represented as a repository screenshot.
+
+### Local Setup
+
+Use an HTTP server because native ES modules are restricted when opened as `file://`. With Python installed, from the repository root run:
+
+```powershell
+python -m http.server 4173 --directory client
+```
+
+Then open `http://localhost:4173/login.html`. There are no build steps, dependency installs, API secrets, or required backend process. Node.js is needed for automated tests.
+
+### Demo Sign In
+
+Use the public exercise-only credentials shown on the login page: `admin@northstar.test` / `DashboardDemo2026!`. The check is implemented in client-side JavaScript and is trivially inspectable/bypassable. It is **not production authentication**. The password is not persisted; session identity is held in tab-scoped `sessionStorage`.
+
+### Testing
+
+Run automated tests from the repository root:
+
+```powershell
+node --test tests/task-05/*.test.mjs tests/task-06/*.test.mjs
+```
+
+Actual test results and manual-check limits are documented in [docs/capstone-architecture.md](docs/capstone-architecture.md), [docs/task-05-api-integration.md](docs/task-05-api-integration.md), and [docs/responsive-testing.md](docs/responsive-testing.md).
+
+### Deployment
+
+The static deployment root is `client/`; [netlify.toml](netlify.toml) configures this publish directory with no build command. See [docs/deployment-guide.md](docs/deployment-guide.md) for Netlify, Cloudflare Pages, and Vercel steps. The GitHub repository is [Harsh20-gif/enterprise-dashboard](https://github.com/Harsh20-gif/enterprise-dashboard).
+
+Live deployment URL: **[not deployed]**
+
+### Known Limitations
+
+- FakeStoreAPI availability/CORS must be rechecked from the deployed origin.
+- Demo authentication is not secure; localStorage records are not shared or backed up.
+- No backend, real accounts, server-side CRUD, transaction records, checkout, or payment processor exists.
+- Sample report rows are illustrative, not actual business analytics.
+- Screen-reader, cross-browser, and full accessibility conformance audits have not been completed.

@@ -1,0 +1,4 @@
+[build]
+  publish = "client"
+
+# Static HTML, CSS, and ES modules require no build command or environment variables.

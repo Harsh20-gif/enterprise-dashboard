@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
-  <script src="js/app.js" defer></script>
+  <script type="module" src="js/app.js"></script>
 </head>
 <body data-page="reports">
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -20,19 +20,19 @@
     <div class="profile-menu"><span class="profile-avatar" aria-hidden="true">AM</span><span class="profile-copy"><strong>Alex Morgan</strong><span>Administrator</span></span></div>
   </header>
   <aside class="sidebar" id="sidebar" aria-label="Sidebar" data-sidebar>
-    <nav class="primary-nav" aria-label="Primary navigation"><p class="nav-heading">Workspace</p><a class="nav-link" href="index.html"><span aria-hidden="true">▦</span>Overview</a><a class="nav-link" href="products.html"><span aria-hidden="true">▧</span>Products</a><a class="nav-link" href="users.html"><span aria-hidden="true">♙</span>Users</a><a class="nav-link is-current" href="reports.html" aria-current="page"><span aria-hidden="true">▤</span>Reports</a><p class="nav-heading nav-heading-spaced">Preferences</p><a class="nav-link" href="settings.html"><span aria-hidden="true">⚙</span>Settings</a></nav>
+    <nav class="primary-nav" aria-label="Primary navigation"><p class="nav-heading">Workspace</p><a class="nav-link" href="index.html"><span aria-hidden="true">▦</span>Overview</a><a class="nav-link" href="products.html"><span aria-hidden="true">▧</span>Products</a><a class="nav-link" href="manage-products.html"><span aria-hidden="true">▣</span>Product management</a><a class="nav-link" href="users.html"><span aria-hidden="true">♙</span>Users</a><a class="nav-link is-current" href="reports.html" aria-current="page"><span aria-hidden="true">▤</span>Reports</a><p class="nav-heading nav-heading-spaced">Preferences</p><a class="nav-link" href="settings.html"><span aria-hidden="true">⚙</span>Settings</a></nav>
     <div class="sidebar-bottom"><span class="status-dot" aria-hidden="true"></span><span>All systems operational</span></div>
   </aside>
   <main class="main-content" id="main-content" tabindex="-1">
-    <header class="page-heading"><div><p class="eyebrow">Workspace / Analytics</p><h1>Reports</h1><p class="muted">Monitor performance and export your activity data.</p></div><button class="button button-primary" type="button" data-export-report><span aria-hidden="true">↓</span> Export report</button></header>
-    <section class="metric-grid report-metrics" aria-label="Report summary">
+    <header class="page-heading"><div><p class="eyebrow">Workspace / Analytics</p><h1>Reports</h1><p class="muted">Illustrative sample rows only; no transaction service is connected.</p></div><button class="button button-primary" type="button" data-export-report><span aria-hidden="true">↓</span> Export report</button></header>
+    <section class="metric-grid report-metrics" aria-label="Illustrative sample report summary">
       <article class="metric-card"><h2 class="metric-label">Gross revenue</h2><p class="metric-value">$84,254</p><p class="metric-note"><span class="positive">↑ 8.2%</span> <span>vs. prior period</span></p></article>
       <article class="metric-card"><h2 class="metric-label">New customers</h2><p class="metric-value">1,248</p><p class="metric-note"><span class="positive">↑ 14.6%</span> <span>vs. prior period</span></p></article>
       <article class="metric-card"><h2 class="metric-label">Average order</h2><p class="metric-value">$67.51</p><p class="metric-note"><span class="positive">↑ 3.4%</span> <span>vs. prior period</span></p></article>
       <article class="metric-card"><h2 class="metric-label">Refund rate</h2><p class="metric-value">1.8%</p><p class="metric-note"><span class="negative">↓ 0.4%</span> <span>vs. prior period</span></p></article>
     </section>
     <section class="panel table-panel" aria-labelledby="report-data-heading">
-      <header class="panel-heading"><div><h2 id="report-data-heading">Revenue report</h2><p class="muted">Transaction totals by date</p></div></header>
+      <header class="panel-heading"><div><h2 id="report-data-heading">Sample revenue report</h2><p class="muted">These example figures are not live business analytics.</p></div></header>
       <form class="filter-form" data-report-filter>
         <div class="field-group"><label for="report-start">Start date</label><input id="report-start" name="start" type="date" value="2026-10-01" required></div>
         <div class="field-group"><label for="report-end">End date</label><input id="report-end" name="end" type="date" value="2026-10-05" required></div>
@@ -52,5 +52,6 @@
     </section>
     <footer class="site-footer"><span>© 2026 Northstar Admin</span><span>Reports and analytics</span></footer>
   </main>
+  <script src="js/auth.js"></script>
 </body>
 </html>

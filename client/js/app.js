@@ -1,3 +1,7 @@
+import { addRecentActivity, ensureDemoUsers, readDemoUsers, writeDemoUsers } from './storage.js';
+
+if (document.documentElement.dataset.authenticated === 'true') {
+ensureDemoUsers();
 const storage = {
   get(key) {
     try {
@@ -171,7 +175,7 @@ if (userRows) {
 
   const makeUserRow = ({ name, email, role, status = 'Active', date }) => {
     const row = document.createElement('tr');
-    Object.assign(row.dataset, { name, email, role, status, date });
+    Object.assign(row.dataset, { id: `demo-${email.toLowerCase()}`, name, email, role, status, date });
     const identityCell = document.createElement('td');
     const person = document.createElement('span');
     person.className = 'table-person';
@@ -219,6 +223,26 @@ if (userRows) {
     return row;
   };
 
+  const saveUsers = () => {
+    const saved = writeDemoUsers(rows().map((row) => ({
+      id: row.dataset.id || `demo-${row.dataset.email.toLowerCase()}`,
+      name: row.dataset.name,
+      email: row.dataset.email,
+      role: row.dataset.role,
+      status: row.dataset.status,
+      date: row.dataset.date
+    })));
+    document.dispatchEvent(new CustomEvent('northstar:users-change', { detail: readDemoUsers() }));
+    return saved;
+  };
+
+  const savedUsers = readDemoUsers();
+  if (savedUsers.length) {
+    userRows.replaceChildren(...savedUsers.map(makeUserRow));
+  } else {
+    saveUsers();
+  }
+
   const fieldMessages = {
     'user-name': 'Enter a name with at least 2 characters.',
     'user-email': 'Enter a valid email address.',
@@ -249,6 +273,7 @@ if (userRows) {
     document.querySelector('#user-name').value = editing ? row.dataset.name : '';
     document.querySelector('#user-email').value = editing ? row.dataset.email : '';
     document.querySelector('#user-role').value = editing ? row.dataset.role : '';
+    document.querySelector('#user-status').value = editing ? row.dataset.status : 'Active';
     dialog.showModal();
     document.querySelector('#user-name').focus();
   };
@@ -277,6 +302,7 @@ if (userRows) {
     const name = document.querySelector('#user-name');
     const email = document.querySelector('#user-email');
     const role = document.querySelector('#user-role');
+    const status = document.querySelector('#user-status');
     const oldEmail = document.querySelector('#editing-email').value;
     const errors = [];
 
@@ -306,7 +332,7 @@ if (userRows) {
       name: name.value.trim(),
       email: email.value.trim(),
       role: role.value,
-      status: existingRow?.dataset.status || 'Active',
+      status: status.value,
       date: existingRow?.dataset.date || new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date())
     };
     const updatedRow = makeUserRow(user);
@@ -316,10 +342,12 @@ if (userRows) {
     } else {
       userRows.prepend(updatedRow);
     }
+    const usersPersisted = saveUsers();
+    addRecentActivity(existingRow ? `Updated demo user ${user.name}` : `Added demo user ${user.name}`);
     currentPage = 1;
     userSearch.value = '';
     renderRows();
-    feedback.textContent = existingRow ? `${user.name}'s details were updated.` : `${user.name} was added to the workspace.`;
+    feedback.textContent = `${existingRow ? `${user.name}'s details were updated.` : `${user.name} was added to the workspace.`}${usersPersisted ? '' : ' Changes are only available for this visit because browser storage could not save them.'}`;
     dialog.close();
   });
 
@@ -333,8 +361,10 @@ if (userRows) {
       if (!window.confirm(`Delete ${row.dataset.name} from the workspace?`)) return;
       const deletedName = row.dataset.name;
       row.remove();
+      const usersPersisted = saveUsers();
+      addRecentActivity(`Deleted demo user ${deletedName}`);
       renderRows();
-      feedback.textContent = `${deletedName} was deleted from the workspace.`;
+      feedback.textContent = `${deletedName} was deleted from the workspace.${usersPersisted ? '' : ' The change could not be saved to browser storage.'}`;
       userSearch.focus();
     }
   });
@@ -393,6 +423,7 @@ if (reportFilter) {
     download.click();
     window.setTimeout(() => URL.revokeObjectURL(downloadUrl), 1000);
     feedback.textContent = `Exported ${visibleRows.length} report ${visibleRows.length === 1 ? 'day' : 'days'} as CSV.`;
+    addRecentActivity('Exported the sample revenue report');
   });
 }
 
@@ -426,8 +457,10 @@ if (settingsForm) {
       notifications: data.getAll('notifications')
     };
     const saved = storage.set('northstar-preferences', JSON.stringify(preferences));
+    addRecentActivity('Saved browser-local account preferences');
     document.querySelector('#settings-feedback').textContent = saved
       ? 'Settings saved in this browser.'
       : 'Settings are updated for this visit, but browser storage is unavailable.';
   });
+}
 }

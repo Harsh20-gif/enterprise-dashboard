@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f6fa">
+  <title>Product management | Northstar Admin</title>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script type="module" src="js/app.js"></script>
+  <script type="module" src="js/manage-products.js"></script>
+</head>
+<body data-page="manage-products">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="topbar">
+    <button class="icon-button menu-toggle" type="button" aria-label="Open navigation menu" aria-controls="sidebar" aria-expanded="false" data-menu-toggle><span aria-hidden="true">☰</span></button>
+    <a class="brand" href="index.html" aria-label="Northstar Admin home"><span class="brand-mark" aria-hidden="true">N</span><span>northstar<span class="brand-light"> / admin</span></span></a>
+    <form class="global-search" role="search" action="users.html" method="get"><label class="visually-hidden" for="global-search">Search users</label><span aria-hidden="true">⌕</span><input id="global-search" name="q" type="search" placeholder="Search users"><kbd aria-hidden="true">/</kbd></form>
+    <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="Use dark theme" title="Use dark theme"><span aria-hidden="true" data-theme-icon>&#x25D0;</span></button>
+    <div class="profile-menu"><span class="profile-avatar" aria-hidden="true">AM</span><span class="profile-copy"><strong>Alex Morgan</strong><span>Demo administrator</span></span></div>
+  </header>
+  <aside class="sidebar" id="sidebar" aria-label="Sidebar" data-sidebar>
+    <nav class="primary-nav" aria-label="Primary navigation"><p class="nav-heading">Workspace</p><a class="nav-link" href="index.html"><span aria-hidden="true">▦</span>Overview</a><a class="nav-link" href="products.html"><span aria-hidden="true">▧</span>Product catalog</a><a class="nav-link is-current" href="manage-products.html" aria-current="page"><span aria-hidden="true">▣</span>Product management</a><a class="nav-link" href="users.html"><span aria-hidden="true">♙</span>Users</a><a class="nav-link" href="reports.html"><span aria-hidden="true">▤</span>Reports</a><p class="nav-heading nav-heading-spaced">Preferences</p><a class="nav-link" href="settings.html"><span aria-hidden="true">⚙</span>Settings</a></nav>
+    <div class="sidebar-bottom"><span class="status-dot" aria-hidden="true"></span><span>Demo workspace</span></div>
+  </aside>
+  <main class="main-content" id="main-content" tabindex="-1">
+    <header class="page-heading"><div><p class="eyebrow">Workspace / Commerce / Local records</p><h1>Product management</h1><p class="muted">Manage products stored in this browser. These records are not sent to FakeStoreAPI.</p></div><button class="button button-primary" type="button" data-add-managed-product><span aria-hidden="true">＋</span> Add product</button></header>
+    <p class="form-feedback" data-managed-feedback role="status" aria-live="polite"></p>
+    <section class="panel table-panel" aria-labelledby="managed-products-heading">
+      <header class="panel-heading users-toolbar"><div><h2 id="managed-products-heading">Local products <span class="count-badge" data-managed-count>0</span></h2><p class="muted">Browser-local demo data; not a shared database</p></div><div class="managed-toolbar"><label class="search-field" for="managed-search"><span aria-hidden="true">⌕</span><span class="visually-hidden">Search local products</span><input id="managed-search" type="search" placeholder="Search local products"></label><label class="visually-hidden" for="managed-category-filter">Filter by category</label><select id="managed-category-filter" class="compact-select"><option value="all">All categories</option></select><label class="visually-hidden" for="managed-sort">Sort local products</label><select id="managed-sort" class="compact-select"><option value="name-asc">Name A to Z</option><option value="name-desc">Name Z to A</option><option value="price-asc">Price low to high</option><option value="price-desc">Price high to low</option></select></div></header>
+      <div class="table-scroll" role="region" aria-label="Locally managed products table" tabindex="0"><table class="data-table"><caption class="visually-hidden">Products managed locally in this browser, with details and actions</caption><thead><tr><th scope="col">Product</th><th scope="col">Category</th><th scope="col">Price</th><th scope="col">Source</th><th scope="col">Actions</th></tr></thead><tbody data-managed-rows></tbody></table></div>
+    </section>
+    <footer class="site-footer"><span>© 2026 Northstar Admin</span><span>Local product records</span></footer>
+  </main>
+
+  <dialog class="user-dialog" aria-labelledby="managed-dialog-title" aria-describedby="managed-dialog-description" data-managed-dialog>
+    <form class="dialog-form" data-managed-form>
+      <header class="dialog-heading"><div><p class="eyebrow">Browser-local record</p><h2 id="managed-dialog-title">Add product</h2><p class="muted" id="managed-dialog-description">This product will be saved in this browser only.</p></div><button class="icon-button dialog-close" type="button" data-close-managed aria-label="Close product form">×</button></header>
+      <input type="hidden" name="id" id="managed-id">
+      <p class="form-feedback" data-managed-dialog-feedback role="status" aria-live="polite"></p>
+      <div class="field-group"><label for="managed-title">Product name</label><input id="managed-title" name="title" required minlength="2" maxlength="120" aria-describedby="managed-title-error"><small class="field-error" id="managed-title-error"></small></div>
+      <div class="field-group"><label for="managed-category">Category</label><input id="managed-category" name="category" required minlength="2" maxlength="60" aria-describedby="managed-category-error"><small class="field-error" id="managed-category-error"></small></div>
+      <div class="field-group"><label for="managed-price">Price (USD)</label><input id="managed-price" name="price" type="number" required min="0" max="1000000" step="0.01" aria-describedby="managed-price-error"><small class="field-error" id="managed-price-error"></small></div>
+      <div class="field-group"><label for="managed-image">Image URL</label><input id="managed-image" name="image" type="url" required maxlength="1500" aria-describedby="managed-image-help managed-image-error"><small class="field-help" id="managed-image-help">Use an HTTPS image address where possible.</small><small class="field-error" id="managed-image-error"></small></div>
+      <div class="field-group"><label for="managed-description">Description</label><textarea id="managed-description" name="description" required minlength="5" maxlength="1200" rows="4" aria-describedby="managed-description-error"></textarea><small class="field-error" id="managed-description-error"></small></div>
+      <div class="dialog-actions"><button class="button button-secondary" type="button" data-cancel-managed>Cancel</button><button class="button button-primary" type="submit" data-save-managed>Save product</button></div>
+    </form>
+  </dialog>
+  <dialog class="user-dialog" aria-labelledby="product-detail-title" data-product-detail-dialog><article class="dialog-form"><header class="dialog-heading"><div><p class="eyebrow">Product details</p><h2 id="product-detail-title">Product details</h2></div><button class="icon-button dialog-close" type="button" data-close-detail aria-label="Close product details">×</button></header><p data-product-detail-description></p><p><strong data-product-detail-category></strong> · <strong data-product-detail-price></strong></p></article></dialog>
+  <script src="js/auth.js"></script>
+</body>
+</html>
