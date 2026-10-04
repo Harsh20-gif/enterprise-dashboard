@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f6fa">
+  <title>Reports | Northstar Admin</title>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body data-page="reports">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="topbar">
+    <button class="icon-button menu-toggle" type="button" aria-label="Open navigation menu" aria-controls="sidebar" aria-expanded="false" data-menu-toggle><span aria-hidden="true">☰</span></button>
+    <a class="brand" href="index.html" aria-label="Northstar Admin home"><span class="brand-mark" aria-hidden="true">N</span><span>northstar<span class="brand-light"> / admin</span></span></a>
+    <form class="global-search" role="search" action="users.html" method="get"><label class="visually-hidden" for="global-search">Search users</label><span aria-hidden="true">⌕</span><input id="global-search" name="q" type="search" placeholder="Search users"><kbd aria-hidden="true">/</kbd></form>
+    <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="Use dark theme" title="Use dark theme"><span aria-hidden="true" data-theme-icon>&#x25D0;</span></button>
+    <div class="profile-menu"><span class="profile-avatar" aria-hidden="true">AM</span><span class="profile-copy"><strong>Alex Morgan</strong><span>Administrator</span></span></div>
+  </header>
+  <aside class="sidebar" id="sidebar" aria-label="Sidebar" data-sidebar>
+    <nav class="primary-nav" aria-label="Primary navigation"><p class="nav-heading">Workspace</p><a class="nav-link" href="index.html"><span aria-hidden="true">▦</span>Overview</a><a class="nav-link" href="users.html"><span aria-hidden="true">♙</span>Users</a><a class="nav-link is-current" href="reports.html" aria-current="page"><span aria-hidden="true">▤</span>Reports</a><p class="nav-heading nav-heading-spaced">Preferences</p><a class="nav-link" href="settings.html"><span aria-hidden="true">⚙</span>Settings</a></nav>
+    <div class="sidebar-bottom"><span class="status-dot" aria-hidden="true"></span><span>All systems operational</span></div>
+  </aside>
+  <main class="main-content" id="main-content" tabindex="-1">
+    <header class="page-heading"><div><p class="eyebrow">Workspace / Analytics</p><h1>Reports</h1><p class="muted">Monitor performance and export your activity data.</p></div><button class="button button-primary" type="button" data-export-report><span aria-hidden="true">↓</span> Export report</button></header>
+    <section class="metric-grid report-metrics" aria-label="Report summary">
+      <article class="metric-card"><h2 class="metric-label">Gross revenue</h2><p class="metric-value">$84,254</p><p class="metric-note"><span class="positive">↑ 8.2%</span> <span>vs. prior period</span></p></article>
+      <article class="metric-card"><h2 class="metric-label">New customers</h2><p class="metric-value">1,248</p><p class="metric-note"><span class="positive">↑ 14.6%</span> <span>vs. prior period</span></p></article>
+      <article class="metric-card"><h2 class="metric-label">Average order</h2><p class="metric-value">$67.51</p><p class="metric-note"><span class="positive">↑ 3.4%</span> <span>vs. prior period</span></p></article>
+      <article class="metric-card"><h2 class="metric-label">Refund rate</h2><p class="metric-value">1.8%</p><p class="metric-note"><span class="negative">↓ 0.4%</span> <span>vs. prior period</span></p></article>
+    </section>
+    <section class="panel table-panel" aria-labelledby="report-data-heading">
+      <header class="panel-heading"><div><h2 id="report-data-heading">Revenue report</h2><p class="muted">Transaction totals by date</p></div></header>
+      <form class="filter-form" data-report-filter>
+        <div class="field-group"><label for="report-start">Start date</label><input id="report-start" name="start" type="date" value="2026-10-01" required></div>
+        <div class="field-group"><label for="report-end">End date</label><input id="report-end" name="end" type="date" value="2026-10-05" required></div>
+        <button class="button button-secondary" type="submit">Apply dates</button>
+      </form>
+      <p class="form-feedback" role="status" aria-live="polite" data-report-feedback></p>
+      <div class="table-scroll" role="region" aria-label="Scrollable revenue report table" tabindex="0"><table class="data-table" data-report-table><caption class="visually-hidden">Daily revenue, order count, and refund amount for October 2026</caption>
+        <thead><tr><th scope="col">Date</th><th scope="col">Revenue</th><th scope="col">Orders</th><th scope="col">Refunds</th><th scope="col">Net revenue</th></tr></thead>
+        <tbody>
+          <tr data-date="2026-10-05"><td>Oct 5, 2026</td><td>$12,480.00</td><td>184</td><td>$210.00</td><td>$12,270.00</td></tr>
+          <tr data-date="2026-10-04"><td>Oct 4, 2026</td><td>$10,920.00</td><td>162</td><td>$145.00</td><td>$10,775.00</td></tr>
+          <tr data-date="2026-10-03"><td>Oct 3, 2026</td><td>$14,350.00</td><td>207</td><td>$320.00</td><td>$14,030.00</td></tr>
+          <tr data-date="2026-10-02"><td>Oct 2, 2026</td><td>$11,784.00</td><td>176</td><td>$198.00</td><td>$11,586.00</td></tr>
+          <tr data-date="2026-10-01"><td>Oct 1, 2026</td><td>$9,640.00</td><td>143</td><td>$175.00</td><td>$9,465.00</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+    <footer class="site-footer"><span>© 2026 Northstar Admin</span><span>Reports and analytics</span></footer>
+  </main>
+</body>
+</html>

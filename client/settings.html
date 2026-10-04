@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f6fa">
+  <title>Settings | Northstar Admin</title>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body data-page="settings">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="topbar">
+    <button class="icon-button menu-toggle" type="button" aria-label="Open navigation menu" aria-controls="sidebar" aria-expanded="false" data-menu-toggle><span aria-hidden="true">☰</span></button>
+    <a class="brand" href="index.html" aria-label="Northstar Admin home"><span class="brand-mark" aria-hidden="true">N</span><span>northstar<span class="brand-light"> / admin</span></span></a>
+    <form class="global-search" role="search" action="users.html" method="get"><label class="visually-hidden" for="global-search">Search users</label><span aria-hidden="true">⌕</span><input id="global-search" name="q" type="search" placeholder="Search users"><kbd aria-hidden="true">/</kbd></form>
+    <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="Use dark theme" title="Use dark theme"><span aria-hidden="true" data-theme-icon>&#x25D0;</span></button>
+    <div class="profile-menu"><span class="profile-avatar" aria-hidden="true">AM</span><span class="profile-copy"><strong>Alex Morgan</strong><span>Administrator</span></span></div>
+  </header>
+  <aside class="sidebar" id="sidebar" aria-label="Sidebar" data-sidebar>
+    <nav class="primary-nav" aria-label="Primary navigation"><p class="nav-heading">Workspace</p><a class="nav-link" href="index.html"><span aria-hidden="true">▦</span>Overview</a><a class="nav-link" href="users.html"><span aria-hidden="true">♙</span>Users</a><a class="nav-link" href="reports.html"><span aria-hidden="true">▤</span>Reports</a><p class="nav-heading nav-heading-spaced">Preferences</p><a class="nav-link is-current" href="settings.html" aria-current="page"><span aria-hidden="true">⚙</span>Settings</a></nav>
+    <div class="sidebar-bottom"><span class="status-dot" aria-hidden="true"></span><span>All systems operational</span></div>
+  </aside>
+  <main class="main-content" id="main-content" tabindex="-1">
+    <header class="page-heading"><div><p class="eyebrow">Workspace / Preferences</p><h1>Settings</h1><p class="muted">Manage your profile, notifications, and appearance.</p></div></header>
+    <p class="form-feedback" id="settings-feedback" role="status" aria-live="polite"></p>
+    <form class="settings-form" data-settings-form>
+      <section class="panel settings-panel" aria-labelledby="profile-settings-heading"><header class="panel-heading"><div><h2 id="profile-settings-heading">Profile details</h2><p class="muted">Your information is visible to workspace members.</p></div></header>
+        <div class="settings-fields"><div class="field-group"><label for="settings-name">Full name</label><input id="settings-name" name="name" type="text" value="Alex Morgan" autocomplete="name" required minlength="2" maxlength="80" aria-describedby="settings-name-error"><small class="field-error" id="settings-name-error"></small></div><div class="field-group"><label for="settings-email">Email address</label><input id="settings-email" name="email" type="email" value="alex.morgan@example.com" autocomplete="email" required maxlength="120" aria-describedby="settings-email-error"><small class="field-error" id="settings-email-error"></small></div><div class="field-group"><label for="settings-title">Job title</label><input id="settings-title" name="title" type="text" value="Administrator" maxlength="80"></div><div class="field-group"><label for="settings-timezone">Time zone</label><select id="settings-timezone" name="timezone"><option>UTC-08:00 Pacific Time</option><option selected>UTC-05:00 Eastern Time</option><option>UTC+00:00 Coordinated Universal Time</option><option>UTC+01:00 Central European Time</option></select></div></div>
+      </section>
+      <section class="panel settings-panel" aria-labelledby="notification-heading"><header class="panel-heading"><div><h2 id="notification-heading">Notifications</h2><p class="muted">Choose which updates you receive by email.</p></div></header>
+        <fieldset class="preference-list"><legend class="visually-hidden">Email notification preferences</legend><label class="preference-row" for="notify-activity"><span><strong>Workspace activity</strong><small>Invitations, mentions, and member updates</small></span><input id="notify-activity" name="notifications" type="checkbox" value="activity" checked></label><label class="preference-row" for="notify-reports"><span><strong>Weekly reports</strong><small>A summary of workspace performance each Monday</small></span><input id="notify-reports" name="notifications" type="checkbox" value="reports"></label><label class="preference-row" for="notify-security"><span><strong>Security alerts</strong><small>Important account and sign-in notifications</small></span><input id="notify-security" name="notifications" type="checkbox" value="security" checked></label></fieldset>
+      </section>
+      <section class="panel settings-panel" aria-labelledby="appearance-heading"><header class="panel-heading"><div><h2 id="appearance-heading">Appearance</h2><p class="muted">Select a theme for this browser.</p></div></header>
+        <fieldset class="theme-options"><legend class="visually-hidden">Theme preference</legend><label class="theme-choice" for="theme-light"><input id="theme-light" name="theme" type="radio" value="light" checked><span class="theme-swatch theme-swatch-light" aria-hidden="true"></span><span>Light</span></label><label class="theme-choice" for="theme-dark"><input id="theme-dark" name="theme" type="radio" value="dark"><span class="theme-swatch theme-swatch-dark" aria-hidden="true"></span><span>Dark</span></label></fieldset>
+      </section>
+      <div class="settings-actions"><button class="button button-primary" type="submit">Save settings</button></div>
+    </form>
+    <footer class="site-footer"><span>© 2026 Northstar Admin</span><span>Account preferences</span></footer>
+  </main>
+</body>
+</html>

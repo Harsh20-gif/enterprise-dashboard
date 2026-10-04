@@ -1,0 +1,14 @@
+<dialog class="user-dialog" aria-labelledby="user-dialog-title" aria-describedby="user-dialog-description" data-user-dialog>
+  <form class="dialog-form" id="user-form">
+    <header class="dialog-heading">
+      <div><p class="eyebrow">Workspace member</p><h2 id="user-dialog-title">Add user</h2><p class="muted" id="user-dialog-description">Enter the user's details and assign a role.</p></div>
+      <button class="icon-button dialog-close" type="button" aria-label="Close user form" data-close-dialog>×</button>
+    </header>
+    <input type="hidden" name="editing-email" id="editing-email">
+    <p class="form-feedback" id="dialog-feedback" role="status" aria-live="polite"></p>
+    <div class="field-group"><label for="user-name">Full name <span aria-hidden="true">*</span></label><input id="user-name" name="name" type="text" autocomplete="name" required minlength="2" maxlength="80" aria-describedby="name-help name-error"><small id="name-help" class="field-help">Use the name shown in your team directory.</small><small id="name-error" class="field-error"></small></div>
+    <div class="field-group"><label for="user-email">Work email <span aria-hidden="true">*</span></label><input id="user-email" name="email" type="email" autocomplete="email" required maxlength="120" aria-describedby="email-help email-error"><small id="email-help" class="field-help">Use a valid work email address.</small><small id="email-error" class="field-error"></small></div>
+    <div class="field-group"><label for="user-role">Role <span aria-hidden="true">*</span></label><select id="user-role" name="role" required aria-describedby="role-error"><option value="">Choose a role</option><option>Administrator</option><option>Engineering</option><option>Product Designer</option><option>Marketing</option><option>Customer Success</option></select><small id="role-error" class="field-error"></small></div>
+    <div class="dialog-actions"><button class="button button-secondary" type="button" data-cancel-dialog>Cancel</button><button class="button button-primary" type="submit" data-submit-user>Add user</button></div>
+  </form>
+</dialog>

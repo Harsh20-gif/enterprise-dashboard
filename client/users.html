@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f6fa">
+  <title>Users | Northstar Admin</title>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body data-page="users">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="topbar">
+    <button class="icon-button menu-toggle" type="button" aria-label="Open navigation menu" aria-controls="sidebar" aria-expanded="false" data-menu-toggle><span aria-hidden="true">☰</span></button>
+    <a class="brand" href="index.html" aria-label="Northstar Admin home"><span class="brand-mark" aria-hidden="true">N</span><span>northstar<span class="brand-light"> / admin</span></span></a>
+    <form class="global-search" role="search" action="users.html" method="get"><label class="visually-hidden" for="global-search">Search users</label><span aria-hidden="true">⌕</span><input id="global-search" name="q" type="search" placeholder="Search users"><kbd aria-hidden="true">/</kbd></form>
+    <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="Use dark theme" title="Use dark theme"><span aria-hidden="true" data-theme-icon>&#x25D0;</span></button>
+    <div class="profile-menu"><span class="profile-avatar" aria-hidden="true">AM</span><span class="profile-copy"><strong>Alex Morgan</strong><span>Administrator</span></span></div>
+  </header>
+  <aside class="sidebar" id="sidebar" aria-label="Sidebar" data-sidebar>
+    <nav class="primary-nav" aria-label="Primary navigation"><p class="nav-heading">Workspace</p><a class="nav-link" href="index.html"><span aria-hidden="true">▦</span>Overview</a><a class="nav-link is-current" href="users.html" aria-current="page"><span aria-hidden="true">♙</span>Users</a><a class="nav-link" href="reports.html"><span aria-hidden="true">▤</span>Reports</a><p class="nav-heading nav-heading-spaced">Preferences</p><a class="nav-link" href="settings.html"><span aria-hidden="true">⚙</span>Settings</a></nav>
+    <div class="sidebar-bottom"><span class="status-dot" aria-hidden="true"></span><span>All systems operational</span></div>
+  </aside>
+  <main class="main-content" id="main-content" tabindex="-1">
+    <header class="page-heading"><div><p class="eyebrow">Workspace / Directory</p><h1>User management</h1><p class="muted">Manage access and account details for your team.</p></div><button class="button button-primary" type="button" data-add-user><span aria-hidden="true">＋</span> Add user</button></header>
+    <p class="form-feedback" id="users-feedback" role="status" aria-live="polite"></p>
+    <section class="panel table-panel users-panel" aria-labelledby="users-table-heading">
+      <header class="panel-heading users-toolbar"><div><h2 id="users-table-heading">All users <span class="count-badge" data-user-count>5</span></h2><p class="muted">A current list of workspace members</p></div><div class="table-tools"><label class="search-field" for="user-search"><span aria-hidden="true">⌕</span><span class="visually-hidden">Search by name, email, or role</span><input id="user-search" type="search" placeholder="Filter users" aria-describedby="search-help"></label><span class="visually-hidden" id="search-help">Results update as you type.</span></div></header>
+      <div class="table-scroll" role="region" aria-label="Scrollable workspace users table" tabindex="0"><table class="data-table users-table"><caption class="visually-hidden">Workspace users, roles, account statuses, and available actions</caption>
+        <thead><tr><th scope="col">User</th><th scope="col">Role</th><th scope="col">Status</th><th scope="col">Date added</th><th scope="col"><span class="visually-hidden">Actions</span></th></tr></thead>
+        <tbody data-user-rows>
+          <tr data-name="Jordan Lee" data-email="jordan.lee@example.com" data-role="Product Designer" data-status="Active" data-date="Oct 5, 2026"><td><span class="table-person"><span class="small-avatar avatar-teal" aria-hidden="true">JL</span><span><strong>Jordan Lee</strong><small>jordan.lee@example.com</small></span></span></td><td>Product Designer</td><td><span class="status-pill status-active">Active</span></td><td>Oct 5, 2026</td><td class="action-cell"><button class="text-button" type="button" data-edit-user aria-label="Edit Jordan Lee">Edit</button><button class="text-button text-danger" type="button" data-delete-user aria-label="Delete Jordan Lee">Delete</button></td></tr>
+          <tr data-name="Sarah Kim" data-email="sarah.kim@example.com" data-role="Engineering" data-status="Active" data-date="Oct 4, 2026"><td><span class="table-person"><span class="small-avatar avatar-coral" aria-hidden="true">SK</span><span><strong>Sarah Kim</strong><small>sarah.kim@example.com</small></span></span></td><td>Engineering</td><td><span class="status-pill status-active">Active</span></td><td>Oct 4, 2026</td><td class="action-cell"><button class="text-button" type="button" data-edit-user aria-label="Edit Sarah Kim">Edit</button><button class="text-button text-danger" type="button" data-delete-user aria-label="Delete Sarah Kim">Delete</button></td></tr>
+          <tr data-name="Marcus Chen" data-email="marcus.chen@example.com" data-role="Marketing" data-status="Pending invitation" data-date="Oct 3, 2026"><td><span class="table-person"><span class="small-avatar avatar-gold" aria-hidden="true">MC</span><span><strong>Marcus Chen</strong><small>marcus.chen@example.com</small></span></span></td><td>Marketing</td><td><span class="status-pill status-pending">Pending invitation</span></td><td>Oct 3, 2026</td><td class="action-cell"><button class="text-button" type="button" data-edit-user aria-label="Edit Marcus Chen">Edit</button><button class="text-button text-danger" type="button" data-delete-user aria-label="Delete Marcus Chen">Delete</button></td></tr>
+          <tr data-name="Amara Patel" data-email="amara.patel@example.com" data-role="Administrator" data-status="Active" data-date="Oct 2, 2026"><td><span class="table-person"><span class="small-avatar avatar-blue" aria-hidden="true">AP</span><span><strong>Amara Patel</strong><small>amara.patel@example.com</small></span></span></td><td>Administrator</td><td><span class="status-pill status-active">Active</span></td><td>Oct 2, 2026</td><td class="action-cell"><button class="text-button" type="button" data-edit-user aria-label="Edit Amara Patel">Edit</button><button class="text-button text-danger" type="button" data-delete-user aria-label="Delete Amara Patel">Delete</button></td></tr>
+          <tr data-name="Daniel Wright" data-email="daniel.wright@example.com" data-role="Customer Success" data-status="Inactive" data-date="Oct 1, 2026"><td><span class="table-person"><span class="small-avatar avatar-violet" aria-hidden="true">DW</span><span><strong>Daniel Wright</strong><small>daniel.wright@example.com</small></span></span></td><td>Customer Success</td><td><span class="status-pill status-inactive">Inactive</span></td><td>Oct 1, 2026</td><td class="action-cell"><button class="text-button" type="button" data-edit-user aria-label="Edit Daniel Wright">Edit</button><button class="text-button text-danger" type="button" data-delete-user aria-label="Delete Daniel Wright">Delete</button></td></tr>
+        </tbody>
+      </table></div>
+      <footer class="table-footer"><p data-pagination-summary>Showing 1-5 of 5 users</p><nav class="pagination" aria-label="User table pages"><button class="button button-pagination" type="button" data-page-previous disabled>Previous</button><span data-page-number aria-current="page">1</span><button class="button button-pagination" type="button" data-page-next disabled>Next</button></nav></footer>
+    </section>
+    <footer class="site-footer"><span>© 2026 Northstar Admin</span><span>User directory</span></footer>
+  </main>
+
+  <dialog class="user-dialog" aria-labelledby="user-dialog-title" aria-describedby="user-dialog-description" data-user-dialog>
+    <form class="dialog-form" id="user-form">
+      <header class="dialog-heading"><div><p class="eyebrow">Workspace member</p><h2 id="user-dialog-title">Add user</h2><p class="muted" id="user-dialog-description">Enter the user's details and assign a role.</p></div><button class="icon-button dialog-close" type="button" aria-label="Close user form" data-close-dialog>×</button></header>
+      <input type="hidden" name="editing-email" id="editing-email">
+      <p class="form-feedback" id="dialog-feedback" role="status" aria-live="polite"></p>
+      <div class="field-group"><label for="user-name">Full name <span aria-hidden="true">*</span></label><input id="user-name" name="name" type="text" autocomplete="name" required minlength="2" maxlength="80" aria-describedby="name-help name-error"><small id="name-help" class="field-help">Use the name shown in your team directory.</small><small id="name-error" class="field-error"></small></div>
+      <div class="field-group"><label for="user-email">Work email <span aria-hidden="true">*</span></label><input id="user-email" name="email" type="email" autocomplete="email" required maxlength="120" aria-describedby="email-help email-error"><small id="email-help" class="field-help">Use a valid work email address.</small><small id="email-error" class="field-error"></small></div>
+      <div class="field-group"><label for="user-role">Role <span aria-hidden="true">*</span></label><select id="user-role" name="role" required aria-describedby="role-error"><option value="">Choose a role</option><option>Administrator</option><option>Engineering</option><option>Product Designer</option><option>Marketing</option><option>Customer Success</option></select><small id="role-error" class="field-error"></small></div>
+      <div class="dialog-actions"><button class="button button-secondary" type="button" data-cancel-dialog>Cancel</button><button class="button button-primary" type="submit" data-submit-user>Add user</button></div>
+    </form>
+  </dialog>
+</body>
+</html>
