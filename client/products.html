@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f6fa">
+  <title>Products | Northstar Admin</title>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/app.js" defer></script>
+  <script type="module" src="js/products.js"></script>
+</head>
+<body data-page="products">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="topbar">
+    <button class="icon-button menu-toggle" type="button" aria-label="Open navigation menu" aria-controls="sidebar" aria-expanded="false" data-menu-toggle><span aria-hidden="true">☰</span></button>
+    <a class="brand" href="index.html" aria-label="Northstar Admin home"><span class="brand-mark" aria-hidden="true">N</span><span>northstar<span class="brand-light"> / admin</span></span></a>
+    <form class="global-search" role="search" action="users.html" method="get"><label class="visually-hidden" for="global-search">Search users</label><span aria-hidden="true">⌕</span><input id="global-search" name="q" type="search" placeholder="Search users"><kbd aria-hidden="true">/</kbd></form>
+    <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="Use dark theme" title="Use dark theme"><span aria-hidden="true" data-theme-icon>&#x25D0;</span></button>
+    <div class="profile-menu"><span class="profile-avatar" aria-hidden="true">AM</span><span class="profile-copy"><strong>Alex Morgan</strong><span>Administrator</span></span></div>
+  </header>
+  <aside class="sidebar" id="sidebar" aria-label="Sidebar" data-sidebar>
+    <nav class="primary-nav" aria-label="Primary navigation">
+      <p class="nav-heading">Workspace</p>
+      <a class="nav-link" href="index.html"><span aria-hidden="true">▦</span>Overview</a>
+      <a class="nav-link" href="products.html" aria-current="page"><span aria-hidden="true">▧</span>Products</a>
+      <a class="nav-link" href="users.html"><span aria-hidden="true">♙</span>Users</a>
+      <a class="nav-link" href="reports.html"><span aria-hidden="true">▤</span>Reports</a>
+      <p class="nav-heading nav-heading-spaced">Preferences</p>
+      <a class="nav-link" href="settings.html"><span aria-hidden="true">⚙</span>Settings</a>
+    </nav>
+    <div class="sidebar-bottom"><span class="status-dot" aria-hidden="true"></span><span>All systems operational</span></div>
+  </aside>
+  <main class="main-content" id="main-content" tabindex="-1">
+    <header class="page-heading catalog-heading">
+      <div><p class="eyebrow">Workspace / Commerce</p><h1>Products</h1><p class="muted">Browse the live product catalog and manage a local demo cart.</p></div>
+      <span class="catalog-count" data-product-count>Loading catalog</span>
+    </header>
+    <div class="catalog-error" data-catalog-error role="alert" hidden>
+      <div><strong>Catalog unavailable</strong><p data-catalog-error-message>Products could not be loaded.</p></div>
+      <button class="button button-secondary" type="button" data-retry-products>Retry</button>
+    </div>
+    <div class="catalog-workspace">
+      <section class="catalog-main" aria-label="Product catalog">
+        <div class="catalog-toolbar">
+          <div class="catalog-search"><span aria-hidden="true">⌕</span><label class="visually-hidden" for="catalog-search">Search products by name, details, or category</label><input id="catalog-search" type="search" placeholder="Search the catalog" autocomplete="off"><button type="button" class="clear-search" data-clear-search aria-label="Clear product search" hidden>×</button></div>
+          <div class="catalog-sort"><label for="product-sort">Sort by</label><select id="product-sort"><option value="default">Default order</option><option value="price-asc">Price: Low to High</option><option value="price-desc">Price: High to Low</option><option value="name-asc">Name: A to Z</option><option value="name-desc">Name: Z to A</option></select></div>
+        </div>
+        <nav class="category-list" aria-label="Product categories" data-category-list>
+          <button class="category-button is-active" type="button" data-category="all" aria-pressed="true">All products</button>
+        </nav>
+        <p class="catalog-feedback" data-catalog-feedback role="status" aria-live="polite">Loading products from FakeStoreAPI.</p>
+        <section class="product-grid" data-product-grid aria-label="Products" aria-busy="true">
+          <article class="product-card product-skeleton" aria-hidden="true"><h2 class="visually-hidden">Loading product</h2><span class="skeleton-image"></span><span class="skeleton-line skeleton-short"></span><span class="skeleton-line"></span><span class="skeleton-line skeleton-price"></span></article>
+          <article class="product-card product-skeleton" aria-hidden="true"><h2 class="visually-hidden">Loading product</h2><span class="skeleton-image"></span><span class="skeleton-line skeleton-short"></span><span class="skeleton-line"></span><span class="skeleton-line skeleton-price"></span></article>
+          <article class="product-card product-skeleton" aria-hidden="true"><h2 class="visually-hidden">Loading product</h2><span class="skeleton-image"></span><span class="skeleton-line skeleton-short"></span><span class="skeleton-line"></span><span class="skeleton-line skeleton-price"></span></article>
+          <article class="product-card product-skeleton" aria-hidden="true"><h2 class="visually-hidden">Loading product</h2><span class="skeleton-image"></span><span class="skeleton-line skeleton-short"></span><span class="skeleton-line"></span><span class="skeleton-line skeleton-price"></span></article>
+        </section>
+      </section>
+      <aside class="cart-panel" aria-labelledby="cart-heading">
+        <header class="cart-heading"><div><p class="eyebrow">Selection</p><h2 id="cart-heading">Shopping cart <span class="cart-count" data-cart-count>0</span></h2></div><span class="cart-bag" aria-hidden="true">▱</span></header>
+        <p class="cart-feedback" data-cart-feedback role="status" aria-live="polite"></p>
+        <div class="cart-items" data-cart-items><p class="cart-empty">Your cart is empty. Add a product to get started.</p></div>
+        <footer class="cart-summary"><div><span>Total items</span><strong data-cart-quantity>0</strong></div><div class="cart-total"><span>Subtotal</span><strong data-cart-subtotal>$0.00</strong></div><p class="cart-note">Demo cart only. No payment is collected.</p></footer>
+      </aside>
+    </div>
+    <footer class="site-footer"><span>© 2026 Northstar Admin</span><span>Live product catalog</span></footer>
+  </main>
+</body>
+</html>

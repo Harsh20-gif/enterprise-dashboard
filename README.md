@@ -69,12 +69,18 @@ client/
 	users.html
 	reports.html
 	settings.html
+	products.html
 	components/          Reusable standalone HTML fragments
 	assets/icons/        Local icon asset directory
 	css/tokens.css       Shared semantic design tokens
 	css/style.css        Shared component styling
 	css/responsive.css   Mobile-first layout and breakpoints
 	js/app.js
+	js/api.js
+	js/products.js
+	js/catalog-utils.js
+	js/cart.js
+	js/storage.js
 	src/index.html       Preserved Task 02 file
 server/src/            Preserved backend workspace
 docs/
@@ -83,6 +89,7 @@ docs/
 	task-03-accessibility.md
 	design-system.md
 	responsive-testing.md
+	task-05-api-integration.md
 tests/accessibility/manual-checklist.md
 ```
 
@@ -112,3 +119,17 @@ The stylesheet is organized into three ordered layers: `client/css/tokens.css` d
 The pages support a system-preference-aware light/dark theme, a visible header theme control, and saved user choice. The mobile layout uses a keyboard-accessible sidebar drawer, a two-column metrics grid, stacked panels, and contained table scrollers. At wider widths the sidebar persists, metrics expand to four columns, and dashboard panels become multi-column.
 
 Viewport results and test procedure are in [docs/responsive-testing.md](docs/responsive-testing.md); token names and values are in [docs/design-system.md](docs/design-system.md). The integrated browser allowed responsive visual review but could not save screenshots into the repository. No Task 04 PNGs are included; exact manual capture steps and required filenames are documented in the responsive testing report.
+
+## Task 05: Dynamic Catalog and REST Client
+
+The Products page integrates directly with FakeStoreAPI (`https://fakestoreapi.com`) using native `fetch` and ES modules. It renders live product cards, API-loaded category controls, case-insensitive search, combined filters, five sort modes, skeleton loading, useful errors with Retry, and a local persistent demo cart. Catalog category/sort preferences persist separately; the existing Task 04 theme preference is retained. Product and cart DOM is created with safe DOM APIs.
+
+The JavaScript is divided into transport/schema validation (`client/js/api.js`), pure catalog algorithms (`client/js/catalog-utils.js`), page behavior (`client/js/products.js`), cart state (`client/js/cart.js`), and validated local persistence (`client/js/storage.js`). Use a local HTTP static server rooted at `client/` to run ES modules; direct `file://` opening is not suitable for module imports.
+
+Task 05 tests use Node's built-in test runner:
+
+```sh
+node --test tests/task-05/*.test.mjs
+```
+
+The recorded local result is 8 passed, 0 failed. Controlled API responses were used only for deterministic UI tests. The actual FakeStoreAPI call returned HTTP 522 from PowerShell and was blocked by CORS in the integrated browser, so successful live API operation is not yet verified. The page shows its real network error and retry action and does not insert mock products. See [docs/task-05-api-integration.md](docs/task-05-api-integration.md) for endpoint, module, test, and limitation details.

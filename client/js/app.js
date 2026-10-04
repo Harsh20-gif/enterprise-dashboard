@@ -104,7 +104,7 @@ document.addEventListener('keydown', (event) => {
   if (event.key !== '/' || event.altKey || event.ctrlKey || event.metaKey) return;
   const active = document.activeElement;
   if (active instanceof HTMLInputElement || active instanceof HTMLTextAreaElement || active?.isContentEditable) return;
-  const target = document.querySelector('#global-search') || document.querySelector('#user-search');
+  const target = document.querySelector('#catalog-search') || document.querySelector('#global-search') || document.querySelector('#user-search');
   if (target) {
     event.preventDefault();
     target.focus();
